@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import * as gameService from '../../services/gameService';
@@ -8,6 +8,9 @@ export default function GameDetails() {
     const [game, setGame] = useState({});
     const [comments, setComments] = useState([]);
     const { gameId } = useParams();
+
+    const usernameRef = useRef();
+    const commentRef = useRef();
 
     useEffect(() => {
         gameService.getOne(gameId)
@@ -29,6 +32,9 @@ export default function GameDetails() {
         );
 
         setComments(state => [...state, newComment]);
+
+        usernameRef.current.value = '';
+        commentRef.current.value = '';
     }
 
     return (
@@ -69,8 +75,8 @@ export default function GameDetails() {
             <article className="create-comment">
                 <label>Add new comment:</label>
                 <form className="form" onSubmit={addCommentHandler}>
-                    <input type="text" name="username" placeholder="username" />
-                    <textarea name="comment" placeholder="Comment......"></textarea>
+                    <input type="text" name="username" placeholder="username" ref={usernameRef}/>
+                    <textarea name="comment" placeholder="Comment......" ref={commentRef}></textarea>
                     <input className="btn submit" type="submit" value="Add Comment" />
                 </form>
             </article>
