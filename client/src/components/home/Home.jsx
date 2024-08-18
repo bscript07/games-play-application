@@ -20,7 +20,7 @@ export default function Home() {
                         <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
                     </div>
                     <div className="data-buttons">
-                        <a href="#" className="btn details-btn">Details</a>
+                        <a href="/games/:gameId" className="btn details-btn">Details</a>
                     </div>
                 </div>
                 <div className="game">
