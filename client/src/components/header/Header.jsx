@@ -1,30 +1,30 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/authContext';
-
+import Path from '../../paths';
 export default function Header() {
 
     const { isAuthenticated, username } = useContext(AuthContext);
 
     return (
         <header>
-            <h1><Link className="home" to="/">GamesPlay</Link></h1>
+            <h1><Link className="home" to={Path.Home}>GamesPlay</Link></h1>
             <nav>
 
                 {isAuthenticated && (
                 <div id="user">
                     <span>{username}</span>
-                    <Link to="/games">All games</Link>
-                    <Link to="/games/create">Create Game</Link>
-                    <Link to="/logout">Logout</Link>
+                    <Link to={Path.Games}>All games</Link>
+                    <Link to={Path.CreateGame}>Create Game</Link>
+                    <Link to={Path.Logout}>Logout</Link>
                 </div>
                 )}
 
                 {!isAuthenticated && ( 
                 <div id="guest">
-                    <Link to="/games">All games</Link>
-                    <Link to="/login">Login</Link>
-                    <Link to="/register">Register</Link>
+                    <Link to={Path.Games}>All games</Link>
+                    <Link to={Path.Login}>Login</Link>
+                    <Link to={Path.Register}>Register</Link>
                 </div>
                 )}
 
