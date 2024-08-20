@@ -10,11 +10,11 @@ export default function Header() {
         <header>
             <h1><Link className="home" to="/">GamesPlay</Link></h1>
             <nav>
-                <Link to="/games">All games</Link>
 
                 {isAuthenticated && (
                 <div id="user">
                     <span>{username}</span>
+                    <Link to="/games">All games</Link>
                     <Link to="/games/create">Create Game</Link>
                     <Link to="/logout">Logout</Link>
                 </div>
@@ -22,6 +22,7 @@ export default function Header() {
 
                 {!isAuthenticated && ( 
                 <div id="guest">
+                    <Link to="/games">All games</Link>
                     <Link to="/login">Login</Link>
                     <Link to="/register">Register</Link>
                 </div>

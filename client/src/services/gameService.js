@@ -4,7 +4,6 @@ const baseUrl = 'http://localhost:3030/data/games'
 
 export const getAll = async () => {
     const result = await request.get(baseUrl);
-
     const games = result;
 
     return games;
