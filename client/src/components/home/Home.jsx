@@ -23,7 +23,7 @@ export default function Home() {
                         <a href="/games/:gameId" className="btn details-btn">Details</a>
                     </div>
                 </div>
-                <div className="game">
+                {/* <div className="game">
                     <div className="image-wrap">
                         <img src="./images/ZombieLang.png" />
                     </div>
@@ -34,7 +34,7 @@ export default function Home() {
                     <div className="data-buttons">
                         <a href="#" className="btn details-btn">Details</a>
                     </div>
-                </div>
+                </div> */}
                 <div className="game">
                     <div className="image-wrap">
                         <img src="./images/MineCraft.png" />
