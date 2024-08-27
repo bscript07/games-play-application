@@ -6,12 +6,11 @@ import * as commentService from '../../services/commentService';
 import AuthContext from "../../context/authContext";
 
 export default function GameDetails() {
-    const { email } = useContext(AuthContext);
+    const { email, userId } = useContext(AuthContext);
     const [game, setGame] = useState({});
     const [comments, setComments] = useState([]);
     const { gameId } = useParams();
 
-    const usernameRef = useRef();
     const commentRef = useRef();
 
     useEffect(() => {
@@ -32,10 +31,12 @@ export default function GameDetails() {
             formData.get('comment')
         );
 
-        setComments(state => [...state, {...newComment, author: { email }}]);
+        setComments(state => [...state, { ...newComment, owner: { email } }]);
 
-        usernameRef.current.value = '';
-        commentRef.current.value = '';
+        if (commentRef.current) {
+            commentRef.current.value = '';
+        }
+
     }
 
     return (
@@ -66,17 +67,21 @@ export default function GameDetails() {
                     )}
                 </div>
 
-                {/* <!-- Edit/Delete buttons ( Only for creator of this game )  -->
-                <div className="buttons">
-                    <a href="#" className="button">Edit</a>
-                    <a href="#" className="button">Delete</a>
-                </div> */}
+                {/* <!-- Edit/Delete buttons ( Only for creator of this game )  --> */}
+
+                {userId === game._ownerId && (
+                    <div className="buttons">
+                        <a href="#" className="button">Edit</a>
+                        <a href="#" className="button">Delete</a>
+                    </div>
+                )}
+
             </div>
 
             <article className="create-comment">
                 <label>Add new comment:</label>
                 <form className="form" onSubmit={addCommentHandler}>
-                    <textarea name="comment" placeholder="Comment......"></textarea>
+                    <textarea ref={commentRef} name="comment" placeholder="Comment......"></textarea>
                     <input className="btn submit" type="submit" value="Add Comment" />
                 </form>
             </article>
