@@ -52,7 +52,7 @@ export default function GameDetails() {
         comment: ''
     }), []);
 
-    // const { values, onChange, onSubmit } = useForm(addCommentHandler, initialValues);
+    useForm(addCommentHandler, initialValues);
 
     return (
         <section id="game-details">
