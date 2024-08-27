@@ -4,9 +4,9 @@ const Path = {
     Login: '/login',
     Logout: '/logout',
     CreateGame: '/games/create',
-    GameDetails: '/games/:gameId',
     Games: '/games',
-    GameEdit: '/games/:gameId/edit'
+    GameDetails: '/games/:gameId',
+    GameEdit: '/games/:gameId/edit',
 };
 
 export default Path;

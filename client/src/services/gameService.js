@@ -27,4 +27,10 @@ export const edit = async (gameId, gameData) => {
     return result;
 }
 
+export const deletePost = async (gameId) => {
+    const result = await request.remove(`${baseUrl}/${gameId}`);
+
+    return result;
+}
+
 

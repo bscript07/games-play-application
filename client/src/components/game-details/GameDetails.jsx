@@ -43,11 +43,16 @@ export default function GameDetails() {
         }
     }
 
+    const deleteHandler = async () => {
+        await gameService.deletePost(gameId);
+        window.location.href = Path.Home;
+    };
+
     const initialValues = useMemo(() => ({
         comment: ''
     }), []);
 
-    const { values, onChange, onSubmit } = useForm(addCommentHandler, initialValues);
+    // const { values, onChange, onSubmit } = useForm(addCommentHandler, initialValues);
 
     return (
         <section id="game-details">
@@ -78,11 +83,10 @@ export default function GameDetails() {
                 </div>
 
                 {/* <!-- Edit/Delete buttons ( Only for creator of this game )  --> */}
-
                 {userId === game._ownerId && (
                     <div className="buttons">
                         <Link to={pathToUrl(Path.GameEdit, { gameId })} className="button">Edit</Link>
-                        <Link to="/games/:gameId/delete" className="button">Delete</Link>
+                        <button onClick={deleteHandler} className="button">Delete</button>
                     </div>
                 )}
 
