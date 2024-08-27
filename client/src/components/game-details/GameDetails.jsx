@@ -1,9 +1,14 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useRef, useState, useMemo } from "react";
+import { Link, useParams } from "react-router-dom";
 
 import * as gameService from '../../services/gameService';
 import * as commentService from '../../services/commentService';
+
+import { pathToUrl } from '../../utils/pathUtils';
+import Path from '../../paths';
+
 import AuthContext from "../../context/authContext";
+import useForm from '../../hooks/useForm';
 
 export default function GameDetails() {
     const { email, userId } = useContext(AuthContext);
@@ -36,8 +41,13 @@ export default function GameDetails() {
         if (commentRef.current) {
             commentRef.current.value = '';
         }
-
     }
+
+    const initialValues = useMemo(() => ({
+        comment: ''
+    }), []);
+
+    const { values, onChange, onSubmit } = useForm(addCommentHandler, initialValues);
 
     return (
         <section id="game-details">
@@ -71,8 +81,8 @@ export default function GameDetails() {
 
                 {userId === game._ownerId && (
                     <div className="buttons">
-                        <a href="#" className="button">Edit</a>
-                        <a href="#" className="button">Delete</a>
+                        <Link to={pathToUrl(Path.GameEdit, { gameId })} className="button">Edit</Link>
+                        <Link to="/games/:gameId/delete" className="button">Delete</Link>
                     </div>
                 )}
 
